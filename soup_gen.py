@@ -10,8 +10,8 @@ class SoupGenerator:
         return self
 
     def __next__(self):
-        url = next(self.url_generator)
-        return self.__url_2_soup(url)
+        country, url = next(self.url_generator)
+        return country, self.__url_2_soup(url)
 
     def __url_2_soup(self, url):
         response = requests.get(url, headers=self.headers)

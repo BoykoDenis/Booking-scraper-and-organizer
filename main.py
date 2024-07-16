@@ -41,8 +41,11 @@ url = "https://www.booking.com/searchresults.html?\
 #all_soup_inner = soup.find_all("div", {'id': 'bodyconstraint-inner'})[0]
 #all_properties_divs=all_soup_inner.find_all("div", class_="b9687b0063")[0].find_all("div", class_="d830fa48ad db402c28f2")[0].find_all("div", class_="f9958fb57b")[0].find_all("div", {'data-testid': 'property-card'})
 
-from_date = Date("2024-08-03")
-to_date = Date("2024-08-13")
-urls_gen = BookingListingURLGenerator(["Croatia", "Paris"], from_date, to_date, 1000)
+from_date = Date().from_ios("2024-08-15")
+to_date = Date().from_ios("2024-08-25")
+urls_gen = BookingListingURLGenerator(["Albania", "Bosnia", "Croatia", "Montenegro", "Italy", "Greece", "Turkey", "Netherland"], from_date, meal="b and d", overall_price_limit=20000, min_days=7, max_days=10)
 soup_gen = SoupGenerator(urls_gen, headers)
 property_parser = PropertyParser(soup_gen)
+
+html = property_parser.gen_html()
+print(html, file=open("output.html", "w"))
